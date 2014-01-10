@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+org.jboss.ide.eclipse.as.core.singledeployable.deployableList=cdv-mobili-ear/src/main/application/META-INF/cdv-mobili-ds.xml\n\nsrc/main/application/META-INF/selic-exemplo-ds.xml\n
