@@ -11,8 +11,8 @@ import br.com.arduinobrew.repo.TicketDAO;
  */
 public class BrewDataRESTService
 {
-  
-  @Inject 
+
+  @Inject
   private TicketDAO ticketDao;
 
 }

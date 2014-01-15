@@ -9,12 +9,14 @@ public class ArduinoComunicationException extends Exception
 {
   private static final long serialVersionUID = 7976006380173532785L;
 
-  public ArduinoComunicationException (String msg) {
-    super (msg);
+  public ArduinoComunicationException(String msg)
+  {
+    super(msg);
   }
-  
-  public ArduinoComunicationException (String msg, Throwable cause) {
-    super(msg,cause);
+
+  public ArduinoComunicationException(String msg, Throwable cause)
+  {
+    super(msg, cause);
   }
 
 }

@@ -3,10 +3,9 @@ package br.com.arduinobrew.domain;
 import java.math.BigDecimal;
 
 /**
- * Representa um 'ticket' recebido do arduino via serial.
- * Contém todas as informações relevantes sobre o processo de brewing: medições dos sensores, 
- * status dos controles, etc. 
- *  
+ * Representa um 'ticket' recebido do arduino via serial. Contém todas as informações relevantes sobre o processo de
+ * brewing: medições dos sensores, status dos controles, etc.
+ * 
  * @author dmarreco
  */
 public class Ticket
@@ -14,32 +13,32 @@ public class Ticket
   /**
    * ticket no formato enviado pelo arduino (CSV String)
    */
-  private String ticketAsString;
-  
+  private String     ticketAsString;
+
   /**
    * Tempo (em milisegundos) transcorrido desde o início do processo de brassagem
    */
-  private Long elapsedTimeMilis;
-  
+  private Long       elapsedTimeMilis;
+
   /**
    * Fase corrente da brassagem
    */
-  private Fase fase;
-  
+  private Fase       fase;
+
   /**
    * Temperatura da panela de brassagem (em graus celsius)
    */
   private BigDecimal temperaturaBrassagem;
-  
+
   /**
    * Temperatura da panela de fervura e de água da filtragem (em graus celsius)
    */
   private BigDecimal temperaturaFervura;
-  
+
   /**
    * Mensagem texto (erro ou informação relevante)
    */
-  private String texto;
+  private String     texto;
 
   public Long getElapsedTimeMilis()
   {
@@ -95,12 +94,10 @@ public class Ticket
   {
     return this.ticketAsString;
   }
-  
-  public void setTicketAsString (String ticketAsString)
+
+  public void setTicketAsString(String ticketAsString)
   {
     this.ticketAsString = ticketAsString;
   }
-  
-  
 
 }

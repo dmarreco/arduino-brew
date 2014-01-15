@@ -62,7 +62,7 @@ public class TicketDAOTest
   {
     String ticketAsString = "6543210;L;62.15;100.03;Processo interrompido: chama piloto [0] apagada;";
     
-    ticketRepo.put(ticketAsString);
+    ticketRepo.write(ticketAsString);
     
     // verifica se linha foi gravada no arquivo
     BufferedReader r = new BufferedReader(new FileReader(ticketRepo.getDataFile()));
@@ -80,7 +80,7 @@ public class TicketDAOTest
     Ticket ticketDeserializado = new Ticket();
     when(ticketParser.deserialize(ticketAsString)).thenReturn(ticketDeserializado);
     
-    ticketRepo.put(ticketAsString);
+    ticketRepo.write(ticketAsString);
     
     List<Ticket> ticketsGravados = ticketRepo.getAll();
     
@@ -99,8 +99,8 @@ public class TicketDAOTest
     when(ticketParser.deserialize(ticketAsString1)).thenReturn(ticketDeserializado1);
     when(ticketParser.deserialize(ticketAsString2)).thenReturn(ticketDeserializado2);
     
-    ticketRepo.put(ticketAsString1);
-    ticketRepo.put(ticketAsString2);
+    ticketRepo.write(ticketAsString1);
+    ticketRepo.write(ticketAsString2);
     
     List<Ticket> ticketsGravados = ticketRepo.getAll();
     
