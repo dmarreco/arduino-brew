@@ -1,4 +1,4 @@
-package br.com.arduinobrew.repo;
+package br.com.arduinobrew.repo.unit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -21,6 +21,9 @@ import org.mockito.MockitoAnnotations;
 import br.com.arduinobrew.cfg.AppConfig;
 import br.com.arduinobrew.cfg.CfgProp;
 import br.com.arduinobrew.domain.Ticket;
+import br.com.arduinobrew.exception.TicketParsingException;
+import br.com.arduinobrew.repo.TicketDAO;
+import br.com.arduinobrew.repo.TicketParser;
 
 public class TicketDAOTest
 {
@@ -34,7 +37,7 @@ public class TicketDAOTest
   private TicketDAO ticketRepo = new TicketDAO();
   
   @Before
-  public void before () throws IOException {
+  public void before () {
      MockitoAnnotations.initMocks(this);
     
     when(appConfig.getProperty(CfgProp.DATA_DIR)).thenReturn("/var/lib/arduino-brew/test/");
@@ -53,7 +56,7 @@ public class TicketDAOTest
   }
   
   @Test
-  public void getAll_em_dao_novo_retorna_lista_vazia () throws IOException {
+  public void getAll_em_dao_novo_retorna_lista_vazia () {
     assertTrue(ticketRepo.getAll().isEmpty());
   }
   
@@ -66,14 +69,19 @@ public class TicketDAOTest
     
     // verifica se linha foi gravada no arquivo
     BufferedReader r = new BufferedReader(new FileReader(ticketRepo.getDataFile()));
+    
+    @SuppressWarnings("unused")
+    String cabecalho = r.readLine(); // descarta o cabeçalho
+    
     String linhaGravada = r.readLine();
+    
     assertEquals(ticketAsString, linhaGravada);
     assertNull(r.readLine()); // verifica se foi a única linha gravada
     r.close();
   }
   
   @Test
-  public void put_de_um_registro_seguido_de_getAll_retorna_lista_com_um_ticket () throws IOException
+  public void put_de_um_registro_seguido_de_getAll_retorna_lista_com_um_ticket () throws TicketParsingException
   {
     String ticketAsString = "6543210;L;62.15;100.03;Processo interrompido: chama piloto [0] apagada;";
 
@@ -89,7 +97,7 @@ public class TicketDAOTest
   }
   
   @Test
-  public void put_de_dois_registros_seguido_de_getAll_retorna_lista_com_dois_tickets () throws IOException
+  public void put_de_dois_registros_seguido_de_getAll_retorna_lista_com_dois_tickets () throws TicketParsingException
   {
     String ticketAsString1 = "6543210;L;62.15;100.03;Processo interrompido: chama piloto [0] apagada;";
     String ticketAsString2 = "ticket 2";

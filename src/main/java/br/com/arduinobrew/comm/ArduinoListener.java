@@ -39,10 +39,11 @@ public class ArduinoListener implements SerialPortEventListener
    **/
   private SerialPort          serialPort;
 
-  private static final String PORT_NAMES[] = {"/dev/tty.usbserial-A9007UX1", // Mac OS X
+  private static final String PORT_NAMES[] = {
+      "/dev/tty.usbserial-A9007UX1", // Mac OS X
       "/dev/ttyUSB0", // Linux
       "COM3", // Windows
-                                           };
+  };
 
   /**
    * A BufferedReader which will be fed by a InputStreamReader converting the bytes into characters making the displayed
@@ -71,13 +72,10 @@ public class ArduinoListener implements SerialPortEventListener
     Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 
     // First, Find an instance of serial port as set in PORT_NAMES.
-    topLoop: while (portEnum.hasMoreElements())
-    {
+    topLoop: while (portEnum.hasMoreElements())    {
       CommPortIdentifier currPortId = (CommPortIdentifier)portEnum.nextElement();
-      for (String portName : PORT_NAMES)
-      {
-        if (currPortId.getName().equals(portName))
-        {
+      for (String portName : PORT_NAMES)      {
+        if (currPortId.getName().equals(portName))        {
           portId = currPortId;
           break topLoop;
         }
@@ -130,12 +128,12 @@ public class ArduinoListener implements SerialPortEventListener
   {
     log.info("Evento recebido da porta serial: [" + oEvent.getEventType() + "]");
     if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE)    {
-      try      {
+      try {
         String ticketAsString = input.readLine();
         Ticket ticket = ticketParser.deserialize(ticketAsString);
         newTicketReceivedEvent.fire(ticket);
       }
-      catch (Exception e)      {
+      catch (Exception e) {
         log.error("Erro processando ticket", e);
       }
     }

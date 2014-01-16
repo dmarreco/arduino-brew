@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+    <title>ArduinoBrew - teste</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <h:outputStylesheet name="css/screen.css" />
+</h:head>
+<h:body>
+
+    <h1>ArduinoBrew - teste</h1>
+    <h2>Lista de Tickets</h2>
+    
+    <h:panelGroup rendered="#{empty consultaTicketsController.tickets}">
+        <em>Sem tickets para listar.</em>
+    </h:panelGroup>
+    <h:dataTable var="_ticket" value="#{consultaTicketsController.tickets}" rendered="#{not empty consultaTicketsController.tickets}" styleClass="simpletablestyle">
+        <h:column>
+            <f:facet name="header">Tempo (ms)</f:facet>
+            #{_ticket.elapsedTimeMilis}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Fase</f:facet>
+            #{_ticket.fase}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Temp. Brassagem</f:facet>
+            #{_ticket.temperaturaBrassagem}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Temp. Fervura</f:facet>
+            #{_ticket.temperaturaFervura}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Mensagem</f:facet>
+            #{_ticket.texto}
+        </h:column>            
+    </h:dataTable>
+
+</h:body>
+</html>

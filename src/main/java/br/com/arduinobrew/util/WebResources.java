@@ -16,14 +16,12 @@ public class WebResources
 
   @Produces
   @RequestScoped
-  public FacesContext produceFacesContext()
-  {
+  public FacesContext produceFacesContext()  {
     return FacesContext.getCurrentInstance();
   }
 
   @Produces
-  public Logger produceLog(InjectionPoint injectionPoint)
-  {
+  public Logger produceLog(InjectionPoint injectionPoint)  {
     return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
   }
 

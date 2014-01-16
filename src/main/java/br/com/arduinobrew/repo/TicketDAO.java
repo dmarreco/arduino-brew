@@ -16,9 +16,13 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+
 import br.com.arduinobrew.cfg.AppConfig;
 import br.com.arduinobrew.cfg.CfgProp;
 import br.com.arduinobrew.domain.Ticket;
+import br.com.arduinobrew.exception.ArduinoPersistenceException;
+import br.com.arduinobrew.exception.TicketParsingException;
 
 /**
  * Provê acesso ao banco interno de tickets recebido do arduino
@@ -27,39 +31,50 @@ import br.com.arduinobrew.domain.Ticket;
  */
 public class TicketDAO
 {
-  @Inject
-  private TicketParser   ticketParser;
+  @Inject 
+  private Logger log;
+  
+  private TicketParser   ticketParser = new TicketParser();
 
   @Inject
   private AppConfig      appConfig;
 
   private File           dataFile;
   private BufferedWriter writer;
+  
+  private static final String HEADER = "Tempo;Fase;Temperatura na Brassagem;Temperatura na Fervura;Mensagem Texto";
 
   /**
    * Cria um novo arquivo para persistencia dos bilhetes recebidos e abre um writer para escrita
    */
   @PostConstruct
-  public void init() throws IOException
+  public void init()
   {
-    DateFormat dataFileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmssS");
-    String dataFileName = "brew_" + dataFileNameDateFormat.format(new Date());
-
-    String repoDirPath = appConfig.getProperty(CfgProp.DATA_DIR);
-
-    File repoDirectory = new File(repoDirPath);
-    if (!repoDirectory.exists())
-    {
-      repoDirectory.mkdirs();
+    try {
+      DateFormat dataFileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmssS");
+      String dataFileName = "brew_" + dataFileNameDateFormat.format(new Date());
+  
+      String repoDirPath = appConfig.getProperty(CfgProp.DATA_DIR);
+  
+      File repoDirectory = new File(repoDirPath);
+      if (!repoDirectory.exists())    {
+        repoDirectory.mkdirs();
+      }
+  
+      dataFile = new File(repoDirectory, dataFileName);
+  
+      dataFile.createNewFile();
+  
+      writer = new BufferedWriter(new FileWriter(dataFile));
+  
+      // Escreve a linha de cabeçalho
+      writer.write(HEADER);
+      writer.newLine();
+      writer.flush();
     }
-
-    dataFile = new File(repoDirectory, dataFileName);
-
-    dataFile.createNewFile();
-
-    writer = new BufferedWriter(new FileWriter(dataFile));
-
-    writeHeader();
+    catch (IOException e) {
+      throw new ArduinoPersistenceException ("Erro ao tentar inicializar arquivo", e);
+    }
   }
 
   /**
@@ -75,28 +90,37 @@ public class TicketDAO
    * Retorna todos os tickets emitidos pelo Arduino e armazenados na base local (em arquivo) desde o início do processo
    * de brassagem
    */
-  public List<Ticket> getAll() throws IOException
+  public List<Ticket> getAll()
   {
     BufferedReader reader = null;
     List<Ticket> res = new ArrayList<Ticket>();
 
-    synchronized (writer)
-    { // espera outra thread terminar de escrever antes de fazer a leitura
-      try
-      {
+    synchronized (writer)    { // espera outra thread terminar de escrever antes de fazer a leitura
+      try      {
         reader = new BufferedReader(new FileReader(dataFile));
         String ticketAsString;
-        while ((ticketAsString = reader.readLine()) != null)
-        {
-          Ticket ticket = ticketParser.deserialize(ticketAsString);
-          res.add(ticket);
+        reader.readLine(); // descarta a primeira linha (cabeçalho)
+        while ((ticketAsString = reader.readLine()) != null)        {
+          Ticket ticket;
+          try {
+            ticket = ticketParser.deserialize(ticketAsString);
+            res.add(ticket);
+          }
+          catch (TicketParsingException tpe) {
+            log.error("Ticket fora do formato esperado: [" + ticketAsString + "]", tpe);
+          }
         }
       }
-      finally
-      {
-        if (reader != null)
-        {
-          reader.close();
+      catch (IOException e) {
+        throw new ArduinoPersistenceException ("Erro ao ler de arquivo", e);
+      }
+      finally      {
+        try {
+          if (reader != null)
+            reader.close();
+        }
+        catch (IOException e) {
+          throw new ArduinoPersistenceException("Erro ao tentar fechar arquivo", e);
         }
       }
     }
@@ -107,30 +131,21 @@ public class TicketDAO
   /**
    * Armazena um novo ticket na base local em arquivo (previamente aberto para escrita)
    */
-  public void write(String ticketAsString) throws IOException
+  public void write(String ticketAsString)
   {
-    synchronized (writer)
-    {
-      writer.write(ticketAsString);
-      writer.newLine();
-      writer.flush();
+    try {
+      synchronized (writer)    {
+        writer.write(ticketAsString);
+        writer.newLine();
+        writer.flush();
+      }
+    }
+    catch (IOException e) {
+      throw new ArduinoPersistenceException("Erro ao escrever ticket em arquivo: [" + ticketAsString + "]", e);
     }
   }
-
-  /**
-   * Cria um cabeçalho no arquivo
-   */
-  private void writeHeader() throws IOException
-  {
-    write("# ------------------------------------------------");
-    write("# Brassagem [" + dataFile.getName() + "]"); // identificação da brassagem
-    write("# ------------------------------------------------");
-    write("");
-    write("Tempo;Fase;Temperatura na Brassagem;Temperatura na Fervura;Mensagem Texto"); // nomes das colunas
-  }
-
-  public File getDataFile()
-  {
+  
+  public File getDataFile()  {
     return this.dataFile;
   }
 

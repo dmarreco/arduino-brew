@@ -3,6 +3,8 @@ package br.com.arduinobrew.controller;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+
 import br.com.arduinobrew.comm.ArduinoListener;
 import br.com.arduinobrew.domain.Ticket;
 import br.com.arduinobrew.repo.TicketDAO;
@@ -15,21 +17,18 @@ import br.com.arduinobrew.repo.TicketDAO;
  */
 public class NewTicketEventConsumer
 {
+  @Inject
+  private Logger log;
 
   @Inject
-  TicketDAO ticketRepo;
+  private TicketDAO ticketRepo;
 
-  public void persisteNovoTicket(@Observes
-  Ticket newTicket)
-  {
-    try
-    {
+  public void persisteNovoTicket(@Observes Ticket newTicket)  {
+    try    {
       ticketRepo.write(newTicket.getTicketAsString());
     }
-    catch (Exception e)
-    {
-      // TODO log
-      e.printStackTrace();
+    catch (Exception e)    {
+      log.error("Erro ao persistir ticket recebido: [{}]", newTicket.toString(),  e);
     }
   }
 

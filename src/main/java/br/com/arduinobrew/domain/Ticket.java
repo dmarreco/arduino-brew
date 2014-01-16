@@ -40,64 +40,57 @@ public class Ticket
    */
   private String     texto;
 
-  public Long getElapsedTimeMilis()
-  {
+  public Long getElapsedTimeMilis()  {
     return elapsedTimeMilis;
   }
 
-  public void setElapsedTimeMilis(Long elapsedTimeMilis)
-  {
+  public void setElapsedTimeMilis(Long elapsedTimeMilis)  {
     this.elapsedTimeMilis = elapsedTimeMilis;
   }
 
-  public Fase getFase()
-  {
+  public Fase getFase()  {
     return fase;
   }
 
-  public void setFase(Fase fase)
-  {
+  public void setFase(Fase fase)  {
     this.fase = fase;
   }
 
-  public BigDecimal getTemperaturaBrassagem()
-  {
+  public BigDecimal getTemperaturaBrassagem()  {
     return temperaturaBrassagem;
   }
 
-  public void setTemperaturaBrassagem(BigDecimal temperaturaBrassagem)
-  {
+  public void setTemperaturaBrassagem(BigDecimal temperaturaBrassagem)  {
     this.temperaturaBrassagem = temperaturaBrassagem;
   }
 
-  public BigDecimal getTemperaturaFervura()
-  {
+  public BigDecimal getTemperaturaFervura()  {
     return temperaturaFervura;
   }
 
-  public void setTemperaturaFervura(BigDecimal temperaturaFervura)
-  {
+  public void setTemperaturaFervura(BigDecimal temperaturaFervura)  {
     this.temperaturaFervura = temperaturaFervura;
   }
 
-  public String getTexto()
-  {
+  public String getTexto()  {
     return texto;
   }
 
-  public void setTexto(String texto)
-  {
+  public void setTexto(String texto)  {
     this.texto = texto;
   }
 
-  public String getTicketAsString()
-  {
+  public String getTicketAsString()  {
     return this.ticketAsString;
   }
 
-  public void setTicketAsString(String ticketAsString)
-  {
+  public void setTicketAsString(String ticketAsString)  {
     this.ticketAsString = ticketAsString;
+  }
+  
+  @Override
+  public String toString () {
+    return getTicketAsString();
   }
 
 }
