@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.008" errors="0" skipped="0" tests="5" name="br.com.arduinobrew.repo.unit.TicketParserTest">
+<testsuite failures="0" time="0.009" errors="0" skipped="0" tests="5" name="br.com.arduinobrew.repo.unit.TicketParserTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Ferramentas\JDK 7u25(x64)\jre\bin"/>
@@ -20,7 +20,7 @@
     <property name="basedir" value="C:\Projetos\arduino-brew-web"/>
     <property name="java.endorsed.dirs" value="C:\Ferramentas\JDK 7u25(x64)\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Projetos\arduino-brew-web\target\surefire\surefirebooter2523581293595009725.jar"/>
+    <property name="surefire.real.class.path" value="C:\Projetos\arduino-brew-web\target\surefire\surefirebooter5189469953216414511.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\dmarreco\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -44,7 +44,7 @@
     <property name="java.vm.specification.version" value="1.7"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Ferramentas\JDK 7u25(x64)\jre"/>
-    <property name="sun.java.command" value="C:\Projetos\arduino-brew-web\target\surefire\surefirebooter2523581293595009725.jar C:\Projetos\arduino-brew-web\target\surefire\surefire2893085451183161410tmp C:\Projetos\arduino-brew-web\target\surefire\surefire4631787287672140850tmp"/>
+    <property name="sun.java.command" value="C:\Projetos\arduino-brew-web\target\surefire\surefirebooter5189469953216414511.jar C:\Projetos\arduino-brew-web\target\surefire\surefire4685818097936708979tmp C:\Projetos\arduino-brew-web\target\surefire\surefire338828988567611983tmp"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="pt"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -62,8 +62,8 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase time="0.001" classname="br.com.arduinobrew.repo.unit.TicketParserTest" name="deserializa_ticket_invalido_lanca_TicketParsingException"/>
-  <testcase time="0.001" classname="br.com.arduinobrew.repo.unit.TicketParserTest" name="deserializa_elapsedTime_com_sucesso"/>
+  <testcase time="0.002" classname="br.com.arduinobrew.repo.unit.TicketParserTest" name="deserializa_elapsedTime_com_sucesso"/>
   <testcase time="0" classname="br.com.arduinobrew.repo.unit.TicketParserTest" name="deserializa_fase_com_sucesso"/>
-  <testcase time="0" classname="br.com.arduinobrew.repo.unit.TicketParserTest" name="deserializa_texto_com_sucesso"/>
-  <testcase time="0.002" classname="br.com.arduinobrew.repo.unit.TicketParserTest" name="deserializa_ticket_completo_com_sucesso"/>
+  <testcase time="0.001" classname="br.com.arduinobrew.repo.unit.TicketParserTest" name="deserializa_texto_com_sucesso"/>
+  <testcase time="0.003" classname="br.com.arduinobrew.repo.unit.TicketParserTest" name="deserializa_ticket_completo_com_sucesso"/>
 </testsuite>

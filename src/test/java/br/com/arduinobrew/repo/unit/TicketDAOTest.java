@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -16,7 +18,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
 
 import br.com.arduinobrew.cfg.AppConfig;
 import br.com.arduinobrew.cfg.CfgProp;
@@ -29,6 +33,9 @@ public class TicketDAOTest
 {
   @Mock
   private AppConfig appConfig;
+  
+  @Mock
+  private Logger log;
   
   @Mock
   private TicketParser ticketParser;

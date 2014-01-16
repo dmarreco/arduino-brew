@@ -24,6 +24,7 @@ public class NewTicketEventConsumer
   private TicketDAO ticketRepo;
 
   public void persisteNovoTicket(@Observes Ticket newTicket)  {
+    log.info("Recebido ticket: [{}]", newTicket.toString());
     try    {
       ticketRepo.write(newTicket.getTicketAsString());
     }

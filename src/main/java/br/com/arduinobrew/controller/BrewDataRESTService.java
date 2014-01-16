@@ -17,7 +17,7 @@ import br.com.arduinobrew.repo.TicketDAO;
  * 
  * @author dmarreco
  */
-@Path("/brew")
+@Path("/ticket")
 @RequestScoped
 public class BrewDataRESTService
 {
@@ -31,4 +31,11 @@ public class BrewDataRESTService
       return ticketDao.getAll();
   }
   
+  @GET  
+  @Path("/hello")  
+  @Produces("text/plain")  
+  public String hello(){  
+      return "Hello World!!! dineshonjava";      
+  } 
+
 }

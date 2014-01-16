@@ -9,8 +9,14 @@
  */
 package br.com.arduinobrew.util;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+
+import br.com.arduinobrew.controller.BrewDataRESTService;
 
 /**
  * A class extending {@link javax.ws.rs.core.Application} and annotated with @ApplicationPath is the Java EE 6 "no XML"
@@ -19,8 +25,14 @@ import javax.ws.rs.core.Application;
  * Resources are served relative to the servlet path specified in the {@link javax.ws.rs.ApplicationPath} annotation.
  * </p>
  */
-@ApplicationPath("/rest")
+@ApplicationPath("/rest/")
+@RequestScoped
 public class JaxRsActivator extends Application
 {
-  /* class body intentionally left blank */
+  @Override
+  public Set<Class<?>> getClasses() {
+      Set<Class<?>> set = new HashSet<Class<?>>();
+      set.add(BrewDataRESTService.class);
+      return set;
+  }
 }

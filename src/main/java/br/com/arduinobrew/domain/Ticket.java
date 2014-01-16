@@ -2,12 +2,15 @@ package br.com.arduinobrew.domain;
 
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Representa um 'ticket' recebido do arduino via serial. Contém todas as informações relevantes sobre o processo de
  * brewing: medições dos sensores, status dos controles, etc.
  * 
  * @author dmarreco
  */
+@XmlRootElement(name="ticket")
 public class Ticket
 {
   /**

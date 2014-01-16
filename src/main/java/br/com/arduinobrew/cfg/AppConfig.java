@@ -10,7 +10,7 @@ import java.util.Properties;
  */
 public class AppConfig
 {
-  private Properties properties;
+  private Properties properties = new Properties();
 
    public AppConfig () throws IOException {
      load();

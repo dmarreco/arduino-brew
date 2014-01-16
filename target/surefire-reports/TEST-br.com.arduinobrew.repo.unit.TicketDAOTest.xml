@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.304" errors="0" skipped="0" tests="4" name="br.com.arduinobrew.repo.unit.TicketDAOTest">
+<testsuite failures="0" time="0.312" errors="0" skipped="0" tests="4" name="br.com.arduinobrew.repo.unit.TicketDAOTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Ferramentas\JDK 7u25(x64)\jre\bin"/>
@@ -20,7 +20,7 @@
     <property name="basedir" value="C:\Projetos\arduino-brew-web"/>
     <property name="java.endorsed.dirs" value="C:\Ferramentas\JDK 7u25(x64)\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Projetos\arduino-brew-web\target\surefire\surefirebooter2523581293595009725.jar"/>
+    <property name="surefire.real.class.path" value="C:\Projetos\arduino-brew-web\target\surefire\surefirebooter5189469953216414511.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\dmarreco\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -44,7 +44,7 @@
     <property name="java.vm.specification.version" value="1.7"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Ferramentas\JDK 7u25(x64)\jre"/>
-    <property name="sun.java.command" value="C:\Projetos\arduino-brew-web\target\surefire\surefirebooter2523581293595009725.jar C:\Projetos\arduino-brew-web\target\surefire\surefire2893085451183161410tmp C:\Projetos\arduino-brew-web\target\surefire\surefire4631787287672140850tmp"/>
+    <property name="sun.java.command" value="C:\Projetos\arduino-brew-web\target\surefire\surefirebooter5189469953216414511.jar C:\Projetos\arduino-brew-web\target\surefire\surefire4685818097936708979tmp C:\Projetos\arduino-brew-web\target\surefire\surefire338828988567611983tmp"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="pt"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -61,8 +61,8 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.192" classname="br.com.arduinobrew.repo.unit.TicketDAOTest" name="getAll_em_dao_novo_retorna_lista_vazia"/>
+  <testcase time="0.205" classname="br.com.arduinobrew.repo.unit.TicketDAOTest" name="getAll_em_dao_novo_retorna_lista_vazia"/>
   <testcase time="0.007" classname="br.com.arduinobrew.repo.unit.TicketDAOTest" name="put_de_dois_registros_seguido_de_getAll_retorna_lista_com_dois_tickets"/>
-  <testcase time="0.006" classname="br.com.arduinobrew.repo.unit.TicketDAOTest" name="put_de_um_registro_verifica_se_linha_foi_gravada_no_arquivo"/>
-  <testcase time="0.006" classname="br.com.arduinobrew.repo.unit.TicketDAOTest" name="put_de_um_registro_seguido_de_getAll_retorna_lista_com_um_ticket"/>
+  <testcase time="0.007" classname="br.com.arduinobrew.repo.unit.TicketDAOTest" name="put_de_um_registro_verifica_se_linha_foi_gravada_no_arquivo"/>
+  <testcase time="0.008" classname="br.com.arduinobrew.repo.unit.TicketDAOTest" name="put_de_um_registro_seguido_de_getAll_retorna_lista_com_um_ticket"/>
 </testsuite>

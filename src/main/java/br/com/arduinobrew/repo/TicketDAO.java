@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -25,21 +26,33 @@ import br.com.arduinobrew.exception.ArduinoPersistenceException;
 import br.com.arduinobrew.exception.TicketParsingException;
 
 /**
- * Provê acesso ao banco interno de tickets recebido do arduino
+ * Provê acesso ao banco interno de tickets recebido do arduino.
+ * 
+ * Inicializa um novo arquivo (e um novo processo de brassagem) cada vez que
+ * a aplicação inicia.
  * 
  * @author dmarreco
  */
+@ApplicationScoped
 public class TicketDAO
 {
-  @Inject 
-  private Logger log;
+  @Inject
+  private TicketParser   ticketParser;
   
-  private TicketParser   ticketParser = new TicketParser();
+  @Inject 
+  private Logger         log;
 
   @Inject
   private AppConfig      appConfig;
 
+  /**
+   * O arquivo que contém os dados
+   */
   private File           dataFile;
+  
+  /**
+   * Um writer para o arquivo de dados
+   */
   private BufferedWriter writer;
   
   private static final String HEADER = "Tempo;Fase;Temperatura na Brassagem;Temperatura na Fervura;Mensagem Texto";
@@ -51,18 +64,20 @@ public class TicketDAO
   public void init()
   {
     try {
-      DateFormat dataFileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmssS");
-      String dataFileName = "brew_" + dataFileNameDateFormat.format(new Date());
-  
+      DateFormat dataFileNameDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss_S");
+      String dataFileName = "" + dataFileNameDateFormat.format(new Date()) + ".brew";
+      
       String repoDirPath = appConfig.getProperty(CfgProp.DATA_DIR);
   
       File repoDirectory = new File(repoDirPath);
       if (!repoDirectory.exists())    {
         repoDirectory.mkdirs();
       }
-  
+
       dataFile = new File(repoDirectory, dataFileName);
-  
+
+      log.info("Inicializando arquivo de tickets: {}", dataFile.getAbsoluteFile());
+      
       dataFile.createNewFile();
   
       writer = new BufferedWriter(new FileWriter(dataFile));
@@ -72,7 +87,7 @@ public class TicketDAO
       writer.newLine();
       writer.flush();
     }
-    catch (IOException e) {
+    catch (Exception e) {
       throw new ArduinoPersistenceException ("Erro ao tentar inicializar arquivo", e);
     }
   }

@@ -73,7 +73,18 @@
           <artifactId>weld-servlet</artifactId>
           <version>2.1.0.Final</version>
         </dependency>
-                
+        
+        <!-- REST -->
+    <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-bundle</artifactId>
+        <version>1.8</version>
+    </dependency>   
+         <dependency>
+        <groupId>asm</groupId>
+        <artifactId>asm</artifactId>
+        <version>3.3.1</version>
+    </dependency>
         
         <!-- TESTE -->                
         <dependency>
@@ -112,30 +123,6 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <!-- An optional Arquillian testing profile that executes integration tests in an embedded Tomcat instance -->
-            <!-- Run with: mvn clean test -Parquillian-tomcat-embedded -->
-            <id>arquillian-tomcat-embedded</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.jboss.arquillian.container</groupId>
-                    <artifactId>arquillian-tomcat-embedded-7</artifactId>
-                    <version>1.0.0.CR4</version>
-                    <scope>test</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.jboss.arquillian.junit</groupId> 
-                    <artifactId>arquillian-junit-container</artifactId>
-                    <version>1.1.2.Final</version> 
-                    <scope>test</scope> 
-                </dependency>
-                
-            </dependencies>
-        </profile>
-    </profiles>      
+    
     
 </project>
