@@ -36,6 +36,30 @@ public class BrewDataRESTService
   @Produces("text/plain")  
   public String hello(){  
       return "Hello World!!! dineshonjava";      
-  } 
+  }
+  
+  @GET
+  @Path("/testdata")  
+  @Produces("text/plain")  
+  public String testData(){  
+      String str = 
+          "# ----------------------------------------\n" +
+          "# highcharts.com\n"+
+          "# Audience Overview\n"+
+          "# 20130309-20130408\n"+
+          "# ----------------------------------------\n"+
+          "Day,Visits,Unique Visitors\n"+
+          "3/9/13,5691,4346\n"+
+          "3/10/13,5403,4112\n"+
+          "3/11/13,15574,11356\n"+
+          "3/12/13,16211,11876\n"+
+          "3/13/13,16427,11966\n"+
+          "3/14/13,16486,12086\n"+
+          "3/15/13,14737,10916\n"+
+          "3/16/13,5838,4507\n"+
+          "3/17/13,5542,4202\n";
+      return str;
+  }
+  
 
 }
