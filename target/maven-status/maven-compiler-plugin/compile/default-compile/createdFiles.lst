@@ -5,7 +5,6 @@ br\com\arduinobrew\exception\ArduinoComunicationException.class
 br\com\arduinobrew\repo\TicketParser.class
 br\com\arduinobrew\controller\BrewDataRESTService.class
 br\com\arduinobrew\exception\ArduinoPersistenceException.class
-br\com\arduinobrew\controller\JaxRsActivator.class
 br\com\arduinobrew\util\WebResources.class
 br\com\arduinobrew\cfg\CfgProp.class
 br\com\arduinobrew\util\JaxRsActivator.class
