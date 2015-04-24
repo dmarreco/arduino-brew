@@ -5,7 +5,7 @@ package br.com.arduinobrew.domain;
  * 
  * @author dmarreco
  */
-public enum Fase
+public enum Phase
 {
   BRASSAGEM("B"), MASHOUT("M"), RECIRCULACAO("C"), LAVAGEM("L"), FERVURA("F"), RESFRIAMENTO("R");
 
@@ -16,7 +16,7 @@ public enum Fase
    */
   private String cod;
 
-  private Fase(String cod)
+  private Phase(String cod)
   {
     this.cod = cod;
   }
@@ -31,9 +31,9 @@ public enum Fase
    * 
    * @return a fase identificada pelo código fornecido. null caso o código não identifique nenhuma fase;
    */
-  public static Fase getByCod(String cod)
+  public static Phase getByCod(String cod)
   {
-    for (Fase fase : Fase.values())
+    for (Phase fase : Phase.values())
     {
       if (fase.getCod().equals(cod))
         return fase;
